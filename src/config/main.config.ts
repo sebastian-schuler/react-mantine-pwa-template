@@ -1,8 +1,8 @@
 import { LoaderDefaultOptions } from '@/utils/loader/types';
 
-const title = 'React-Mantine PWA';
-const email = 'email@gmail.com';
-const repository = 'https://github.com/sebastian-schuler/react-mantine-pwa';
+const title = 'React-Mantine PWA Template';
+const email = 'contact@sebastian-schuler.com';
+const repository = 'https://github.com/sebastian-schuler/react-mantine-pwa-template';
 const dateFormat = 'DD.MM.YYYY';
 const homepage = 'https://sebastian-schuler.com/';
 
