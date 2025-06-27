@@ -9,6 +9,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Provider as JotaiProvider } from 'jotai';
 import 'mantine-react-table/styles.css';
 import '@/providers/theme/global-styles.css';
+import { AuthProvider } from './providers/auth';
 import { CustomThemeProvider } from './providers/theme';
 
 const container = document.getElementById('root') as HTMLElement;
@@ -20,11 +21,13 @@ function render(App: ComponentType) {
         <StrictMode>
             <JotaiProvider>
                 <HelmetProvider>
-                    <QueryClientProvider client={queryClient}>
-                        <CustomThemeProvider>
-                            <App />
-                        </CustomThemeProvider>
-                    </QueryClientProvider>
+                    <AuthProvider>
+                        <QueryClientProvider client={queryClient}>
+                            <CustomThemeProvider>
+                                <App />
+                            </CustomThemeProvider>
+                        </QueryClientProvider>
+                    </AuthProvider>
                 </HelmetProvider>
             </JotaiProvider>
         </StrictMode>,
