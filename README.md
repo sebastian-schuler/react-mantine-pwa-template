@@ -4,6 +4,8 @@
 
 **React Mantine PWA Template** is an opinionated template and starter kit for building Progressive Web Applications with React. Designed to streamline development, it combines essential libraries, components, utilities, and developer tools to accelerate your workflow.
 
+Check out the **[Live Demo](https://react-mantine-pwa-template.vercel.app/)**.
+
 ## Tech Stack & Features
 
 ### Core Technologies
@@ -179,10 +181,6 @@ Place your environment variables in a `.env` file (prefixed with `VITE_`):
 
 - Templates available in the `env/` directory
 - Access via `import.meta.env.VITE_VARIABLE_NAME`
-
-## Demo
-
-Check out the [live demo](https://example.com/)
 
 ## License
 
