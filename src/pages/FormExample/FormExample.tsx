@@ -62,7 +62,11 @@ function FormExample() {
                 key={form.key(`employees.${index}.active`)}
                 {...form.getInputProps(`employees.${index}.active`, { type: 'checkbox' })}
             />
-            <ActionIcon color='red' onClick={() => form.removeListItem('employees', index)}>
+            <ActionIcon
+                color='red'
+                onClick={() => form.removeListItem('employees', index)}
+                aria-label='Delete employee'
+            >
                 <FiTrash size={16} />
             </ActionIcon>
         </Group>

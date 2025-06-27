@@ -21,7 +21,7 @@ function SidebarLink(props: SidebarLinkConfig) {
             >
                 <Group justify='space-between' gap={0}>
                     <Box style={{ display: 'flex', alignItems: 'center' }}>
-                        <ThemeIcon variant={isActive ? 'filled' : 'default'} size={30}>
+                        <ThemeIcon variant={isActive ? 'filled' : 'light'} size={30}>
                             <Icon size={16} />
                         </ThemeIcon>
                         <Text ml='md' fw={isActive ? 600 : 500}>
@@ -41,7 +41,7 @@ function SidebarLink(props: SidebarLinkConfig) {
             <UnstyledButton key={item.label} component={Link} to={item.link} className={classes.link}>
                 <Group>
                     {ItemIcon && (
-                        <ThemeIcon variant={isActive ? 'filled' : 'default'} size={30}>
+                        <ThemeIcon variant={isActive ? 'filled' : 'light'} size={30}>
                             <ItemIcon size={16} />
                         </ThemeIcon>
                     )}
@@ -65,7 +65,7 @@ function SidebarLink(props: SidebarLinkConfig) {
                         flex={1}
                         className={classes.groupControlButton}
                     >
-                        <ThemeIcon variant={isActive ? 'filled' : 'default'} size={30}>
+                        <ThemeIcon variant={isActive ? 'filled' : 'light'} size={30}>
                             <Icon size={16} />
                         </ThemeIcon>
                         <Text ml='md' fw={isActive ? 600 : 500}>
@@ -73,7 +73,11 @@ function SidebarLink(props: SidebarLinkConfig) {
                         </Text>
                     </UnstyledButton>
                     {hasLinks && (
-                        <ActionIcon variant='outline' onClick={() => setOpened((o) => !o)}>
+                        <ActionIcon
+                            variant='light'
+                            onClick={() => setOpened((o) => !o)}
+                            aria-label={`Toggle to see child pages of ${props.label}`}
+                        >
                             <FaChevronRight
                                 className={classes.chevron}
                                 style={{ transform: opened ? 'rotate(-90deg)' : 'none' }}

@@ -10,7 +10,7 @@ function UserButton() {
         <>
             <UnstyledButton className={classes.user} onClick={open}>
                 <Group>
-                    <Avatar src='https://picsum.photos/70' radius='xl' />
+                    <Avatar src='https://picsum.photos/70' radius='xl' alt='user avatar' />
 
                     <div style={{ flex: 1 }}>
                         <Text size='sm' fw={500}>

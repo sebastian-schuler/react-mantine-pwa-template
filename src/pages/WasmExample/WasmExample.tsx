@@ -129,29 +129,33 @@ function WasmExample() {
                             <strong>{(input ** 2).toLocaleString()}</strong> element calculations—which determines
                             the workload size and directly impacts the computation time.
                         </Text>
-                        <Group>
-                            <Text></Text>
-                            <NumberInput
-                                disabled={isJsLoading || isWasmLoading}
-                                min={100}
-                                max={5000}
-                                value={input}
-                                onChange={(v) => setInput(Number(v))}
-                                stepHoldDelay={150}
-                                stepHoldInterval={100}
-                                step={100}
-                                label=''
-                            />
-                            <Button loading={isJsLoading || isWasmLoading} onClick={() => runBenchmark()}>
-                                Run JS
-                            </Button>
-                            {input >= 3000 && (
-                                <Text c={'red'}>
-                                    Values of 3000 and above might take a long time or run out of memory depending
-                                    on your system.
-                                </Text>
-                            )}
-                        </Group>
+                        <div>
+                            <Text id='benchmark-input-label' size='sm'>
+                                Matrix dimension
+                            </Text>
+                            <Group>
+                                <NumberInput
+                                    disabled={isJsLoading || isWasmLoading}
+                                    min={100}
+                                    max={5000}
+                                    value={input}
+                                    onChange={(v) => setInput(Number(v))}
+                                    stepHoldDelay={150}
+                                    stepHoldInterval={100}
+                                    step={100}
+                                    aria-labelledby='benchmark-input-label'
+                                />
+                                <Button loading={isJsLoading || isWasmLoading} onClick={() => runBenchmark()}>
+                                    Run Benchmark
+                                </Button>
+                                {input >= 3000 && (
+                                    <Text c={'red'}>
+                                        Values of 3000 and above might take a long time or run out of memory
+                                        depending on your system.
+                                    </Text>
+                                )}
+                            </Group>
+                        </div>
 
                         <Table>
                             <Table.Thead>
@@ -169,7 +173,12 @@ function WasmExample() {
                                         {isWasmLoading ? (
                                             <Loader size={'xs'} />
                                         ) : (
-                                            <NumberFormatter suffix=' ms' value={timeWasm} thousandSeparator='_' />
+                                            <NumberFormatter
+                                                suffix=' ms'
+                                                value={timeWasm}
+                                                thousandSeparator=' '
+                                                decimalScale={2}
+                                            />
                                         )}
                                     </Table.Td>
                                     <Table.Td>
@@ -193,7 +202,12 @@ function WasmExample() {
                                         {isJsLoading ? (
                                             <Loader size={'xs'} />
                                         ) : (
-                                            <NumberFormatter suffix=' ms' value={timeJs} thousandSeparator='_' />
+                                            <NumberFormatter
+                                                suffix=' ms'
+                                                value={timeJs}
+                                                thousandSeparator=' '
+                                                decimalScale={2}
+                                            />
                                         )}
                                     </Table.Td>
                                     <Table.Td>
@@ -218,7 +232,7 @@ function WasmExample() {
                         <Table w={600}>
                             <Table.Thead>
                                 <Table.Tr>
-                                    <Table.Th w={100}>Input</Table.Th>
+                                    <Table.Th w={100}>Dimension</Table.Th>
                                     <Table.Th w={150}>Wasm Time</Table.Th>
                                     <Table.Th w={150}>Wasm Performance</Table.Th>
                                     <Table.Th w={150}>JS Time</Table.Th>
@@ -233,12 +247,13 @@ function WasmExample() {
                                     .filter((i) => i !== null)
                                     .map((item, i) => (
                                         <Table.Tr key={i}>
-                                            <Table.Td>{item.input}</Table.Td>
+                                            <Table.Td>{item.input} x {item.input}</Table.Td>
                                             <Table.Td>
                                                 <NumberFormatter
                                                     suffix=' ms'
                                                     value={item.wasm}
-                                                    thousandSeparator='_'
+                                                    thousandSeparator=' '
+                                                    decimalScale={2}
                                                 />
                                             </Table.Td>
                                             <Table.Td>{getPercentageString(item.wasm, item.js, 'md')}</Table.Td>
@@ -246,7 +261,8 @@ function WasmExample() {
                                                 <NumberFormatter
                                                     suffix=' ms'
                                                     value={item.js}
-                                                    thousandSeparator='_'
+                                                    thousandSeparator=' '
+                                                    decimalScale={2}
                                                 />
                                             </Table.Td>
                                             <Table.Td>{getPercentageString(item.js, item.wasm, 'md')}</Table.Td>

@@ -29,17 +29,31 @@ function Header() {
             </Group>
             <Group>
                 <Tooltip label='Search page (CTRL+K)'>
-                    <ActionIcon variant='outline' onClick={() => spotlight.open()}>
+                    <ActionIcon
+                        variant='light'
+                        onClick={() => spotlight.open()}
+                        aria-label='Open the spotlight to globally search the application and run commands'
+                    >
                         <FaSearch />
                     </ActionIcon>
                 </Tooltip>
                 <Tooltip label='Github Repository'>
-                    <ActionIcon variant='outline' component='a' href={mainConfig.repository} target='_blank'>
+                    <ActionIcon
+                        variant='light'
+                        component='a'
+                        href={mainConfig.repository}
+                        target='_blank'
+                        aria-label='Check out the Github repository for this application'
+                    >
                         <FaGithub />
                     </ActionIcon>
                 </Tooltip>
                 <Tooltip label='Switch theme'>
-                    <ActionIcon variant='outline' onClick={toggleColorScheme}>
+                    <ActionIcon
+                        variant='light'
+                        onClick={toggleColorScheme}
+                        aria-label='Toggle the color scheme between dark and light theme'
+                    >
                         {colorScheme === 'dark' ? (
                             <FiMoon color={theme.colors.blue[5]} />
                         ) : (

@@ -20,7 +20,7 @@ const Shell = () => {
             <AppShell
                 header={{ height: 60 }}
                 navbar={{
-                    width: { sm: 200, lg: 300 },
+                    width: 300,
                     breakpoint: 'sm',
                     collapsed: { mobile: !isOpen },
                 }}

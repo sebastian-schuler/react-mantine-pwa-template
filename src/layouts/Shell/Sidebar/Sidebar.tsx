@@ -13,17 +13,17 @@ function Sidebar() {
             <div className={classes.header}>
                 <Group justify='start' gap={'sm'}>
                     <Tooltip label='Placeholder Button'>
-                        <ActionIcon variant='filled'>
+                        <ActionIcon variant='light' aria-label='Placeholder button'>
                             <FiFile />
                         </ActionIcon>
                     </Tooltip>
                     <Tooltip label='Placeholder Button'>
-                        <ActionIcon variant='filled'>
+                        <ActionIcon variant='light' aria-label='Placeholder button'>
                             <FiDownload />
                         </ActionIcon>
                     </Tooltip>
                     <Tooltip label='Placeholder Button'>
-                        <ActionIcon variant='filled'>
+                        <ActionIcon variant='light' aria-label='Placeholder button'>
                             <FiUpload />
                         </ActionIcon>
                     </Tooltip>
