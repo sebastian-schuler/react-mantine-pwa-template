@@ -145,12 +145,6 @@ Jotai provides simple atoms-based state management for cross-application state, 
 - Installable on mobile and desktop devices
 - Automatic updates (configurable in `vite.config.ts`)
 
-### 📱 Performance
-
-- Bundle size: ~65KB for largest chunk
-- Initial load: ~0.6s
-- Cached loads: ~0.01s
-
 ### Error Handling
 
 The `withErrorHandler` HOC catches errors and displays friendly fallback UIs:
