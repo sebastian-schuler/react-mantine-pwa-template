@@ -1,0 +1,97 @@
+{
+    "name": "react-mantine-pwa-template",
+    "version": "0.1.0",
+    "type": "module",
+    "description": "Starter kit for modern web applications",
+    "homepage": "https://sebastian-schuler.com/",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/sebastian-schuler/react-mantine-pwa-template.git"
+    },
+    "bugs": {
+        "url": "https://github.com/sebastian-schuler/react-mantine-pwa-template/issues",
+        "email": "contact@sebastian-schuler.com"
+    },
+    "license": "MIT",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc -b && vite build",
+        "wasm:compile": "cd rust-wasm && wasm-pack build --release --target web",
+        "preview": "vite preview",
+        "https-preview": "serve dist",
+        "prettier:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
+        "prettier:write": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
+        "lint:check": "eslint --max-warnings=0 \"src/**/*.{js,jsx,ts,tsx,json}\"",
+        "ts:check": "tsc --noEmit",
+        "test:unit": "vitest src",
+        "test:e2e": "playwright test",
+        "test:e2e:ui": "playwright test --ui",
+        "docker:build": "docker build -t pwa-test-app ."
+    },
+    "dependencies": {
+        "@dr.pogodin/react-helmet": "^3.0.2",
+        "@mantine/core": "^8.1.2",
+        "@mantine/dates": "^8.1.2",
+        "@mantine/form": "^8.1.2",
+        "@mantine/hooks": "^8.1.2",
+        "@mantine/notifications": "^8.1.2",
+        "@mantine/spotlight": "^8.1.2",
+        "@tanstack/react-query": "^5.81.2",
+        "axios": "^1.10.0",
+        "dayjs": "^1.11.13",
+        "jotai": "^2.12.5",
+        "mantine-form-zod-resolver": "^1.3.0",
+        "mantine-react-table": "^2.0.0-beta.9",
+        "react": "^19.1.0",
+        "react-dom": "^19.1.0",
+        "react-error-boundary": "^6.0.0",
+        "react-icons": "^5.5.0",
+        "react-router": "^7.6.2",
+        "zod": "^3.25.67"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.29.0",
+        "@playwright/test": "^1.53.1",
+        "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+        "@tsconfig/recommended": "^1.0.10",
+        "@types/node": "^22.15.33",
+        "@types/react": "^19.1.8",
+        "@types/react-dom": "^19.1.6",
+        "@vitejs/plugin-react": "^4.6.0",
+        "eslint": "^9.29.0",
+        "eslint-plugin-react-hooks": "^5.2.0",
+        "eslint-plugin-react-refresh": "^0.4.20",
+        "globals": "^16.2.0",
+        "https-localhost": "^4.7.1",
+        "postcss": "^8.5.6",
+        "postcss-preset-mantine": "^1.17.0",
+        "postcss-simple-vars": "^7.0.1",
+        "prettier": "^3.6.1",
+        "typescript": "~5.8.3",
+        "typescript-eslint": "^8.35.0",
+        "vite": "^6.3.5",
+        "vite-plugin-pwa": "^1.0.0",
+        "vitest": "^3.2.4",
+        "wasm-pack": "^0.13.1"
+    },
+    "lint-staged": {
+        "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+            "prettier --write"
+        ],
+        "src/**/*.{js,jsx,ts,tsx,json}": [
+            "eslint --max-warnings=0"
+        ]
+    },
+    "author": {
+        "name": "Sebastian Schuler",
+        "email": "contact@sebastian-schuler.com",
+        "url": "https://sebastian-schuler.com/"
+    },
+    "keywords": [
+        "react",
+        "pwa",
+        "mantine",
+        "template",
+        "vite"
+    ]
+}
