@@ -39,7 +39,7 @@
 - **Local HTTPS**: Built-in support for local HTTPS development
 - **Docker**: Dockerfile setup and ready to dockerize the application
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Quick Start
 
@@ -145,12 +145,6 @@ Jotai provides simple atoms-based state management for cross-application state, 
 - Installable on mobile and desktop devices
 - Automatic updates (configurable in `vite.config.ts`)
 
-### 📱 Performance
-
-- Bundle size: ~65KB for largest chunk
-- Initial load: ~0.6s
-- Cached loads: ~0.01s
-
 ### Error Handling
 
 The `withErrorHandler` HOC catches errors and displays friendly fallback UIs:
@@ -163,7 +157,7 @@ export default withErrorHandler(MyComponent);
 export default withErrorHandler(App);
 ```
 
-## 🧪 Testing
+## Testing
 
 ### Unit Tests
 
@@ -186,10 +180,10 @@ Place your environment variables in a `.env` file (prefixed with `VITE_`):
 - Templates available in the `env/` directory
 - Access via `import.meta.env.VITE_VARIABLE_NAME`
 
-## 🔗 Demo
+## Demo
 
 Check out the [live demo](https://example.com/)
 
-## 📄 License
+## License
 
 [MIT](./LICENSE)
