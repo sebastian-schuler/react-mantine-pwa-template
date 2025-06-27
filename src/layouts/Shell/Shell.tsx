@@ -24,7 +24,6 @@ const Shell = () => {
                     breakpoint: 'sm',
                     collapsed: { mobile: !isOpen },
                 }}
-                padding='md'
                 footer={{ height: 30, offset: true }}
                 h={'100%'}
             >

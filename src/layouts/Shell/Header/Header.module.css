@@ -1,0 +1,24 @@
+.appTitle {
+    font-size: var(--mantine-h2-font-size);
+    font-weight: 600;
+    background-image: light-dark(
+        linear-gradient(70deg, var(--mantine-primary-color-7), var(--mantine-color-indigo-6)),
+        linear-gradient(70deg, var(--mantine-primary-color-4), var(--mantine-color-indigo-3))
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+
+    @media (max-width: $mantine-breakpoint-lg) {
+        font-size: var(--mantine-h3-font-size);
+    }
+
+    @media (max-width: $mantine-breakpoint-sm) {
+        font-size: var(--mantine-h4-font-size);
+    }
+
+    @media (max-width: $mantine-breakpoint-xs) {
+        font-size: var(--mantine-h5-font-size);
+    }
+}

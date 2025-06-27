@@ -1,0 +1,33 @@
+.appContainer {
+    height: 100%;
+}
+
+.containerXPadding {
+    padding-left: var(--mantine-spacing-sm);
+    padding-right: var(--mantine-spacing-sm);
+
+    @media (min-width: $mantine-breakpoint-md) {
+        padding-left: var(--mantine-spacing-lg);
+        padding-right: var(--mantine-spacing-lg);
+    }
+
+    @media (min-width: $mantine-breakpoint-xl) {
+        padding-left: calc(var(--mantine-spacing-xl) + 0.5rem);
+        padding-right: calc(var(--mantine-spacing-xl) + 0.5rem);
+    }
+}
+
+.containerYPadding {
+    padding-top: var(--mantine-spacing-sm);
+    padding-bottom: var(--mantine-spacing-sm);
+
+    @media (min-width: $mantine-breakpoint-md) {
+        padding-top: var(--mantine-spacing-lg);
+        padding-bottom: var(--mantine-spacing-lg);
+    }
+
+    @media (min-width: $mantine-breakpoint-xl) {
+        padding-top: calc(var(--mantine-spacing-xl) + 0.25rem);
+        padding-bottom: calc(var(--mantine-spacing-xl) + 0.25rem);
+    }
+}

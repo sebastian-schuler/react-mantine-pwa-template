@@ -7,7 +7,6 @@ import {
     MantineSize,
     NumberFormatter,
     NumberInput,
-    ScrollArea,
     Stack,
     Table,
     Text,
@@ -15,6 +14,7 @@ import {
 } from '@mantine/core';
 import { useStateHistory } from '@mantine/hooks';
 import { Helmet } from '@dr.pogodin/react-helmet';
+import AppContainer from '@/layouts/AppContainer';
 
 const workerJsBenchmark = new Worker(new URL('@/providers/wasm/benchmark-js-worker.ts', import.meta.url), {
     type: 'module',
@@ -95,186 +95,174 @@ function WasmExample() {
     }, [timeJs, timeWasm, handlers, input, wasmResult, jsResult, isLoading]);
 
     return (
-        <>
+        <AppContainer withScroll scrollbars={'xy'}>
             <Helmet title='Wasm Example' />
-            <Stack h={'100%'}>
-                <ScrollArea>
-                    <Stack>
-                        <Title>Wasm Example / Benchmark</Title>
-                        <Text>
-                            This benchmark measures the performance of matrix multiplication of two large square
-                            matrices — a computationally intensive task involving many floating-point
-                            multiplications and additions. Each element in the output matrix is calculated as the
-                            sum of products of corresponding elements from a row of the first matrix and a column
-                            of the second matrix.
-                        </Text>
-                        <Text>
-                            To ensure accurate and fair comparison between the JavaScript and Rust (compiled to
-                            WebAssembly) implementations, both computations are offloaded to Web Workers. This
-                            design prevents blocking the main UI thread, keeping the application responsive during
-                            heavy calculations. The main thread sends input matrices to the workers, which perform
-                            the multiplication independently and send back the results along with the computation
-                            time.
-                        </Text>
-                        <Text>
-                            Using Web Workers isolates the benchmarking workload and allows measurement of raw
-                            computation speed without UI interference. This setup highlights the performance
-                            benefits of WebAssembly over JavaScript for numeric-heavy tasks while maintaining
-                            smooth user experience.
-                        </Text>
-                        <Title order={2}>Run benchmark</Title>
-                        <Text>
-                            When the user inputs a value like <strong>{input}</strong>, it means the benchmark will
-                            multiply two {input}x{input} matrices—performing{' '}
-                            <strong>{(input ** 2).toLocaleString()}</strong> element calculations—which determines
-                            the workload size and directly impacts the computation time.
-                        </Text>
-                        <div>
-                            <Text id='benchmark-input-label' size='sm'>
-                                Matrix dimension
+
+            <Stack>
+                <Title>Wasm Example / Benchmark</Title>
+                <Text>
+                    This benchmark measures the performance of matrix multiplication of two large square matrices —
+                    a computationally intensive task involving many floating-point multiplications and additions.
+                    Each element in the output matrix is calculated as the sum of products of corresponding
+                    elements from a row of the first matrix and a column of the second matrix.
+                </Text>
+                <Text>
+                    To ensure accurate and fair comparison between the JavaScript and Rust (compiled to
+                    WebAssembly) implementations, both computations are offloaded to Web Workers. This design
+                    prevents blocking the main UI thread, keeping the application responsive during heavy
+                    calculations. The main thread sends input matrices to the workers, which perform the
+                    multiplication independently and send back the results along with the computation time.
+                </Text>
+                <Text>
+                    Using Web Workers isolates the benchmarking workload and allows measurement of raw computation
+                    speed without UI interference. This setup highlights the performance benefits of WebAssembly
+                    over JavaScript for numeric-heavy tasks while maintaining smooth user experience.
+                </Text>
+                <Title order={2}>Run benchmark</Title>
+                <Text>
+                    When the user inputs a value like <strong>{input}</strong>, it means the benchmark will
+                    multiply two {input}x{input} matrices—performing{' '}
+                    <strong>{(input ** 2).toLocaleString()}</strong> element calculations—which determines the
+                    workload size and directly impacts the computation time.
+                </Text>
+                <div>
+                    <Text id='benchmark-input-label' size='sm'>
+                        Matrix dimension
+                    </Text>
+                    <Group>
+                        <NumberInput
+                            disabled={isJsLoading || isWasmLoading}
+                            min={100}
+                            max={5000}
+                            value={input}
+                            onChange={(v) => setInput(Number(v))}
+                            stepHoldDelay={150}
+                            stepHoldInterval={100}
+                            step={100}
+                            aria-labelledby='benchmark-input-label'
+                        />
+                        <Button loading={isJsLoading || isWasmLoading} onClick={() => runBenchmark()}>
+                            Run Benchmark
+                        </Button>
+                        {input >= 3000 && (
+                            <Text c={'red'}>
+                                Values of 3000 and above might take a long time or run out of memory depending on
+                                your system.
                             </Text>
-                            <Group>
-                                <NumberInput
-                                    disabled={isJsLoading || isWasmLoading}
-                                    min={100}
-                                    max={5000}
-                                    value={input}
-                                    onChange={(v) => setInput(Number(v))}
-                                    stepHoldDelay={150}
-                                    stepHoldInterval={100}
-                                    step={100}
-                                    aria-labelledby='benchmark-input-label'
-                                />
-                                <Button loading={isJsLoading || isWasmLoading} onClick={() => runBenchmark()}>
-                                    Run Benchmark
-                                </Button>
-                                {input >= 3000 && (
-                                    <Text c={'red'}>
-                                        Values of 3000 and above might take a long time or run out of memory
-                                        depending on your system.
-                                    </Text>
+                        )}
+                    </Group>
+                </div>
+
+                <Table>
+                    <Table.Thead>
+                        <Table.Tr>
+                            <Table.Th>Process</Table.Th>
+                            <Table.Th>Time</Table.Th>
+                            <Table.Th>Performance</Table.Th>
+                            <Table.Th>Result</Table.Th>
+                        </Table.Tr>
+                    </Table.Thead>
+                    <Table.Tbody>
+                        <Table.Tr>
+                            <Table.Td>Wasm</Table.Td>
+                            <Table.Td>
+                                {isWasmLoading ? (
+                                    <Loader size={'xs'} />
+                                ) : (
+                                    <NumberFormatter
+                                        suffix=' ms'
+                                        value={timeWasm}
+                                        thousandSeparator=' '
+                                        decimalScale={2}
+                                    />
                                 )}
-                            </Group>
-                        </div>
+                            </Table.Td>
+                            <Table.Td>
+                                {isWasmLoading || isLoading ? (
+                                    <Loader size={'xs'} />
+                                ) : (
+                                    timeWasm && timeJs && getPercentageString(timeWasm, timeJs)
+                                )}
+                            </Table.Td>
+                            <Table.Td>
+                                {isResultMatching === null ? '' : isResultMatching ? '✅ Match' : '❌ Mismatch'}
+                            </Table.Td>
+                        </Table.Tr>
+                        <Table.Tr>
+                            <Table.Td>JavaScript</Table.Td>
+                            <Table.Td>
+                                {isJsLoading ? (
+                                    <Loader size={'xs'} />
+                                ) : (
+                                    <NumberFormatter
+                                        suffix=' ms'
+                                        value={timeJs}
+                                        thousandSeparator=' '
+                                        decimalScale={2}
+                                    />
+                                )}
+                            </Table.Td>
+                            <Table.Td>
+                                {isWasmLoading || isLoading ? (
+                                    <Loader size={'xs'} />
+                                ) : (
+                                    timeWasm && timeJs && getPercentageString(timeJs, timeWasm)
+                                )}
+                            </Table.Td>
+                            <Table.Td>
+                                {isResultMatching === null ? '' : isResultMatching ? '✅ Match' : '❌ Mismatch'}
+                            </Table.Td>
+                        </Table.Tr>
+                    </Table.Tbody>
+                </Table>
 
-                        <Table>
-                            <Table.Thead>
-                                <Table.Tr>
-                                    <Table.Th>Process</Table.Th>
-                                    <Table.Th>Time</Table.Th>
-                                    <Table.Th>Performance</Table.Th>
-                                    <Table.Th>Result</Table.Th>
+                <Title order={2}>History</Title>
+                <Table w={600}>
+                    <Table.Thead>
+                        <Table.Tr>
+                            <Table.Th w={100}>Dimension</Table.Th>
+                            <Table.Th w={150}>Wasm Time</Table.Th>
+                            <Table.Th w={150}>Wasm Performance</Table.Th>
+                            <Table.Th w={150}>JS Time</Table.Th>
+                            <Table.Th w={150}>JS Performance</Table.Th>
+                            <Table.Th></Table.Th>
+                        </Table.Tr>
+                    </Table.Thead>
+                    <Table.Tbody>
+                        {history.history
+                            .slice()
+                            .reverse()
+                            .filter((i) => i !== null)
+                            .map((item, i) => (
+                                <Table.Tr key={i}>
+                                    <Table.Td>
+                                        {item.input} x {item.input}
+                                    </Table.Td>
+                                    <Table.Td>
+                                        <NumberFormatter
+                                            suffix=' ms'
+                                            value={item.wasm}
+                                            thousandSeparator=' '
+                                            decimalScale={2}
+                                        />
+                                    </Table.Td>
+                                    <Table.Td>{getPercentageString(item.wasm, item.js, 'md')}</Table.Td>
+                                    <Table.Td>
+                                        <NumberFormatter
+                                            suffix=' ms'
+                                            value={item.js}
+                                            thousandSeparator=' '
+                                            decimalScale={2}
+                                        />
+                                    </Table.Td>
+                                    <Table.Td>{getPercentageString(item.js, item.wasm, 'md')}</Table.Td>
                                 </Table.Tr>
-                            </Table.Thead>
-                            <Table.Tbody>
-                                <Table.Tr>
-                                    <Table.Td>Wasm</Table.Td>
-                                    <Table.Td>
-                                        {isWasmLoading ? (
-                                            <Loader size={'xs'} />
-                                        ) : (
-                                            <NumberFormatter
-                                                suffix=' ms'
-                                                value={timeWasm}
-                                                thousandSeparator=' '
-                                                decimalScale={2}
-                                            />
-                                        )}
-                                    </Table.Td>
-                                    <Table.Td>
-                                        {isWasmLoading || isLoading ? (
-                                            <Loader size={'xs'} />
-                                        ) : (
-                                            timeWasm && timeJs && getPercentageString(timeWasm, timeJs)
-                                        )}
-                                    </Table.Td>
-                                    <Table.Td>
-                                        {isResultMatching === null
-                                            ? ''
-                                            : isResultMatching
-                                              ? '✅ Match'
-                                              : '❌ Mismatch'}
-                                    </Table.Td>
-                                </Table.Tr>
-                                <Table.Tr>
-                                    <Table.Td>JavaScript</Table.Td>
-                                    <Table.Td>
-                                        {isJsLoading ? (
-                                            <Loader size={'xs'} />
-                                        ) : (
-                                            <NumberFormatter
-                                                suffix=' ms'
-                                                value={timeJs}
-                                                thousandSeparator=' '
-                                                decimalScale={2}
-                                            />
-                                        )}
-                                    </Table.Td>
-                                    <Table.Td>
-                                        {isWasmLoading || isLoading ? (
-                                            <Loader size={'xs'} />
-                                        ) : (
-                                            timeWasm && timeJs && getPercentageString(timeJs, timeWasm)
-                                        )}
-                                    </Table.Td>
-                                    <Table.Td>
-                                        {isResultMatching === null
-                                            ? ''
-                                            : isResultMatching
-                                              ? '✅ Match'
-                                              : '❌ Mismatch'}
-                                    </Table.Td>
-                                </Table.Tr>
-                            </Table.Tbody>
-                        </Table>
-
-                        <Title order={2}>History</Title>
-                        <Table w={600}>
-                            <Table.Thead>
-                                <Table.Tr>
-                                    <Table.Th w={100}>Dimension</Table.Th>
-                                    <Table.Th w={150}>Wasm Time</Table.Th>
-                                    <Table.Th w={150}>Wasm Performance</Table.Th>
-                                    <Table.Th w={150}>JS Time</Table.Th>
-                                    <Table.Th w={150}>JS Performance</Table.Th>
-                                    <Table.Th></Table.Th>
-                                </Table.Tr>
-                            </Table.Thead>
-                            <Table.Tbody>
-                                {history.history
-                                    .slice()
-                                    .reverse()
-                                    .filter((i) => i !== null)
-                                    .map((item, i) => (
-                                        <Table.Tr key={i}>
-                                            <Table.Td>{item.input} x {item.input}</Table.Td>
-                                            <Table.Td>
-                                                <NumberFormatter
-                                                    suffix=' ms'
-                                                    value={item.wasm}
-                                                    thousandSeparator=' '
-                                                    decimalScale={2}
-                                                />
-                                            </Table.Td>
-                                            <Table.Td>{getPercentageString(item.wasm, item.js, 'md')}</Table.Td>
-                                            <Table.Td>
-                                                <NumberFormatter
-                                                    suffix=' ms'
-                                                    value={item.js}
-                                                    thousandSeparator=' '
-                                                    decimalScale={2}
-                                                />
-                                            </Table.Td>
-                                            <Table.Td>{getPercentageString(item.js, item.wasm, 'md')}</Table.Td>
-                                        </Table.Tr>
-                                    ))}
-                            </Table.Tbody>
-                        </Table>
-                        <div></div>
-                    </Stack>
-                </ScrollArea>
+                            ))}
+                    </Table.Tbody>
+                </Table>
+                <div></div>
             </Stack>
-        </>
+        </AppContainer>
     );
 }
 

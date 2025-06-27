@@ -4,6 +4,7 @@ import { Anchor, Button, Code, Group, Stack, Text, Title } from '@mantine/core';
 import { Helmet } from '@dr.pogodin/react-helmet';
 import { type MRT_ColumnDef, MantineReactTable } from 'mantine-react-table';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import AppContainer from '@/layouts/AppContainer';
 import { UserDTO } from '@/providers/api/types/User';
 import useServerStore from '@/providers/api/use-server-store';
 
@@ -65,7 +66,7 @@ function ApiExample() {
     );
 
     return (
-        <>
+        <AppContainer withScroll scrollbars={'xy'}>
             <Helmet title='API Example' />
             <Stack h={'100%'}>
                 <Breadcrumbs />
@@ -102,7 +103,7 @@ function ApiExample() {
                     mantineTableContainerProps={{ style: { maxHeight: '300px' } }}
                 />
             </Stack>
-        </>
+        </AppContainer>
     );
 }
 

@@ -1,9 +1,10 @@
 import { SimpleGrid, Stack, Text, Title } from '@mantine/core';
 import { Helmet } from '@dr.pogodin/react-helmet';
+import AppContainer from '@/layouts/AppContainer';
 
 function PrivacyNotice() {
     return (
-        <>
+        <AppContainer withScroll>
             <Helmet title='Privacy Notice' />
             <Stack h={'100%'}>
                 <Title>Privacy Notice</Title>
@@ -33,7 +34,7 @@ function PrivacyNotice() {
                     </Text>
                 </SimpleGrid>
             </Stack>
-        </>
+        </AppContainer>
     );
 }
 

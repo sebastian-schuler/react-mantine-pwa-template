@@ -21,6 +21,7 @@ import { Helmet } from '@dr.pogodin/react-helmet';
 import { zod4Resolver } from 'mantine-form-zod-resolver';
 import { z } from 'zod/v4';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import AppContainer from '@/layouts/AppContainer';
 
 const schema = z.strictObject({
     adminName: z.string().min(2).max(60),
@@ -73,7 +74,7 @@ function FormExample() {
     ));
 
     return (
-        <>
+        <AppContainer withScroll>
             <Helmet title='Form Example' />
             <Stack h={'100%'}>
                 <Breadcrumbs />
@@ -143,7 +144,7 @@ function FormExample() {
                 </Group>
                 <Code block>{formattedData}</Code>
             </Stack>
-        </>
+        </AppContainer>
     );
 }
 

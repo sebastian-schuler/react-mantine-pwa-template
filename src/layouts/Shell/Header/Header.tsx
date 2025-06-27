@@ -1,67 +1,34 @@
-import { FaGithub, FaSearch } from 'react-icons/fa';
-import { FiMoon, FiSun } from 'react-icons/fi';
-import {
-    ActionIcon,
-    Burger,
-    Group,
-    Title,
-    Tooltip,
-    useComputedColorScheme,
-    useMantineColorScheme,
-    useMantineTheme,
-} from '@mantine/core';
-import { spotlight } from '@mantine/spotlight';
-import AppContainer from '@/components/AppContainer';
+import { Burger, Group, Text, useMantineTheme } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import mainConfig from '@/config/main.config';
+import AppContainer from '@/layouts/AppContainer';
 import { useSidebar } from '@/providers/state';
+import classes from './Header.module.css';
+import HeaderButtonLayout from './HeaderButtonLayout';
 
 function Header() {
-    const { toggleColorScheme } = useMantineColorScheme();
-    const colorScheme = useComputedColorScheme();
     const { toggle: toggleSidebar, isOpen: isSidebarOpen } = useSidebar();
-
     const theme = useMantineTheme();
+    const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`);
+
     return (
-        <AppContainer h={'100%'} justify={'space-between'}>
+        <AppContainer
+            h={'100%'}
+            justify={'space-between'}
+            withYPadding={false}
+            withXPadding={isMobile ? true : false}
+            px={isMobile ? undefined : 'md'}
+        >
             <Group>
-                <Burger hiddenFrom='sm' opened={isSidebarOpen} onClick={toggleSidebar} />
-                <Title size={'h3'}>{mainConfig.title}</Title>
+                <Burger
+                    hiddenFrom='sm'
+                    opened={isSidebarOpen}
+                    onClick={toggleSidebar}
+                    aria-label='Toggle sidebar menu'
+                />
+                <Text className={classes.appTitle}>{mainConfig.title}</Text>
             </Group>
-            <Group>
-                <Tooltip label='Search page (CTRL+K)'>
-                    <ActionIcon
-                        variant='light'
-                        onClick={() => spotlight.open()}
-                        aria-label='Open the spotlight to globally search the application and run commands'
-                    >
-                        <FaSearch />
-                    </ActionIcon>
-                </Tooltip>
-                <Tooltip label='Github Repository'>
-                    <ActionIcon
-                        variant='light'
-                        component='a'
-                        href={mainConfig.repository}
-                        target='_blank'
-                        aria-label='Check out the Github repository for this application'
-                    >
-                        <FaGithub />
-                    </ActionIcon>
-                </Tooltip>
-                <Tooltip label='Switch theme'>
-                    <ActionIcon
-                        variant='light'
-                        onClick={toggleColorScheme}
-                        aria-label='Toggle the color scheme between dark and light theme'
-                    >
-                        {colorScheme === 'dark' ? (
-                            <FiMoon color={theme.colors.blue[5]} />
-                        ) : (
-                            <FiSun color={theme.colors.yellow[5]} />
-                        )}
-                    </ActionIcon>
-                </Tooltip>
-            </Group>
+            <HeaderButtonLayout visibleFrom='sm' />
         </AppContainer>
     );
 }

@@ -6,7 +6,7 @@ const appTheme = createTheme({
             '#f3f0ff',
             '#e5dbff',
             '#d0bfff',
-            '#b197fc', 
+            '#b197fc',
             '#9775fa', // Primary shade
             '#845ef7',
             '#7950f2',

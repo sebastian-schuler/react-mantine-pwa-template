@@ -1,8 +1,9 @@
-import { Fragment } from 'react';
 import { Button, List, Stack, Text, Title } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import { Helmet } from '@dr.pogodin/react-helmet';
+import AppContainer from '@/layouts/AppContainer';
 import { useHotKeysDialog } from '@/providers/state';
+import PrimaryColorSelect from './PrimaryColorSelect';
 
 function Dashboard() {
     const { open: openHotKeysDialog } = useHotKeysDialog();
@@ -15,7 +16,7 @@ function Dashboard() {
     }
 
     return (
-        <Fragment>
+        <AppContainer withScroll>
             <Helmet title='Dashboard' />
             <Stack>
                 <Title>Dashboard</Title>
@@ -24,7 +25,7 @@ function Dashboard() {
                     and Jotai.
                 </Text>
                 <Title order={2}>Features</Title>
-                <List>
+                <List icon='•'>
                     <List.Item>Optimized to run as a PWA</List.Item>
                     <List.Item>
                         A comprehensive component library in Mantine, using highly performant CSS modules for
@@ -43,16 +44,32 @@ function Dashboard() {
                         Mantine notification system that can easily be called anywhere in the application
                     </List.Item>
                 </List>
+                <Title order={2}>Notifications</Title>
+                <Text>
+                    The notification system can be called anywhere and manages displayed notifications. Give it a
+                    try!
+                </Text>
                 <div>
                     <Button onClick={showNotification}>Test Notifications</Button>
                 </div>
+                <Title order={2}>Primary Theme Color</Title>
+                <Text>
+                    Change the primary color of the theme to dynamically adjust the look of the application.
+                </Text>
+                <div>
+                    <PrimaryColorSelect />
+                </div>
+                <Title order={2}>Hotkeys</Title>
+                <Text>
+                    You can setup global hotkeys that work anywhere in the application. Check the list below.
+                </Text>
                 <div>
                     <Button aria-label='open hotkeys dialog' onClick={openHotKeysDialog}>
                         Hotkeys
                     </Button>
                 </div>
             </Stack>
-        </Fragment>
+        </AppContainer>
     );
 }
 
