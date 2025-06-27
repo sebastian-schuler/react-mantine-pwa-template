@@ -16,7 +16,7 @@
     "scripts": {
         "dev": "vite",
         "build": "tsc -b && vite build",
-        "wasm:compile": "cd rust-wasm && wasm-pack build --release --target web",
+        "wasm:compile": "cd rust-wasm && wasm-pack build --release --target web && rm pkg/.gitignore",
         "preview": "vite preview",
         "https-preview": "serve dist",
         "prettier:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",

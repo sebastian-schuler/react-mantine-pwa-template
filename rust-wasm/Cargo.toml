@@ -3,6 +3,8 @@ name = "rust-wasm"
 description = "Rust wasm bindings for the react PWA."
 version = "0.1.0"
 edition = "2021"
+repository = "https://github.com/sebastian-schuler/react-mantine-pwa-template"
+license = "MIT"
 
 [lib]
 crate-type = ["cdylib"]
