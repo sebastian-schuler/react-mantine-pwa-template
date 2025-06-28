@@ -22,7 +22,7 @@ Check out the **[Live Demo](https://react-mantine-pwa-template.vercel.app/)**.
 | [Jotai](https://axios-http.com/)                   | v2      | Atomic approach to state management                                       |
 | [Wasm Pack](https://github.com/rustwasm/wasm-pack) | v0.13   | Generate WebAssembly code from Rust easily and use it in React            |
 | [React Query](https://tanstack.com/query)          | v5      | Data fetching, caching, synchronizing, and updating                       |
-| [react-i18next](https://tanstack.com/query)        | v5      | Translation and language state management                                 |
+| [react-i18next](https://tanstack.com/query)        | v15     | Translation and language state management                                 |
 
 ### Key Features
 
