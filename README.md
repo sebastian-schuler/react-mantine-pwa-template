@@ -22,6 +22,7 @@ Check out the **[Live Demo](https://react-mantine-pwa-template.vercel.app/)**.
 | [Jotai](https://axios-http.com/)                   | v2      | Atomic approach to state management                                       |
 | [Wasm Pack](https://github.com/rustwasm/wasm-pack) | v0.13   | Generate WebAssembly code from Rust easily and use it in React            |
 | [React Query](https://tanstack.com/query)          | v5      | Data fetching, caching, synchronizing, and updating                       |
+| [react-i18next](https://tanstack.com/query)        | v5      | Translation and language state management                                 |
 
 ### Key Features
 
@@ -33,6 +34,7 @@ Check out the **[Live Demo](https://react-mantine-pwa-template.vercel.app/)**.
 - **Hotkeys**: Built-in keyboard shortcuts for common actions
 - **Error Handling**: Graceful error boundaries with custom fallbacks
 - **Performance**: All green Lighthouse scores with optimized bundle size
+- **i18n**: Multi-language support
 
 ### Developer Tools
 
@@ -101,6 +103,8 @@ react-mantine-pwa-template/
 │           ├── requests/        # Raw Axios request functions for each endpoint
 │           ├── store/           # Composable React Query hooks (queries, mutations)
 │           ├── types/           # TypeScript interfaces and DTOs for API data contracts
+│       ├── auth/                # Authentication handler
+│       ├── i18n/                # Translations, locales, multi-language support
 │       ├── routes/              # Custom routing logic and guards
 │       ├── state/               # Global state management (e.g., Jotai atoms)
 │       ├── theme/               # Theme and styling configuration (e.g., Mantine)
