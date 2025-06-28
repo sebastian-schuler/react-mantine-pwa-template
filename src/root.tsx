@@ -10,6 +10,7 @@ import { Provider as JotaiProvider } from 'jotai';
 import 'mantine-react-table/styles.css';
 import '@/providers/theme/global-styles.css';
 import { AuthProvider } from './providers/auth';
+import './providers/i18n';
 import { CustomThemeProvider } from './providers/theme';
 
 const container = document.getElementById('root') as HTMLElement;

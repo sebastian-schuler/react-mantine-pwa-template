@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "lokalise.i18n-ally",
+        "clinyong.vscode-css-modules",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "vunguyentuan.vscode-postcss",
+        "rust-lang.rust-analyzer"
+    ]
+}

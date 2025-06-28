@@ -1,0 +1,12 @@
+{
+    "typescript.tsdk": "node_modules\\typescript\\lib",
+    "editor.tabSize": 4,
+    "prettier.useTabs": false,
+    "splitHTMLAttributes.tabSize": 4,
+    "editor.indentSize": "tabSize",
+    "i18n-ally.localesPaths": [
+        "src/providers/i18n/locales"
+    ],
+    "i18n-ally.keystyle": "nested",
+    "i18n-ally.namespace": true
+}

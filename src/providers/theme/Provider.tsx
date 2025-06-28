@@ -1,6 +1,6 @@
 import { Fragment } from 'react/jsx-runtime';
 import { ColorSchemeScript, MantineProvider, localStorageColorSchemeManager } from '@mantine/core';
-import { useThemePrimaryColor } from '../state/primary-color';
+import { useThemePrimaryColor } from '../state';
 import appTheme from './themes';
 
 const colorSchemeManager = localStorageColorSchemeManager({

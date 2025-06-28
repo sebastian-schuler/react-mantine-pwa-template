@@ -1,5 +1,5 @@
 import { ColorSwatch, Combobox, Group, Input, InputBase, Text, useCombobox } from '@mantine/core';
-import { useThemePrimaryColor } from '@/providers/state/primary-color';
+import { useThemePrimaryColor } from '@/providers/state';
 
 const PrimaryColorSelect = () => {
     const { themePrimaryColor, setThemePrimaryColor, availableColors } = useThemePrimaryColor();
